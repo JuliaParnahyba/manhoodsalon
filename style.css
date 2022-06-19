@@ -1,0 +1,802 @@
+/* ----- RESERTANDO OS COMPONENTES ----- */
+
+/* o * aplica um seletor geral, aplicando as configuraçãos para todos os conteúdos da página. */
+* {
+  margin: 0; /*retira completamente as margens de todas as "caixas"*/
+  padding: 0; /*retira qualquer espaçamento interno das "caixas"*/
+  box-sizing: border-box; /*aplica a somatória dos tamanhos de borda a borda*/
+}
+
+ul {
+  list-style: none; /*retira os bullet point padrão do ul de todo o documento. Caso haja outro trecho no documento que necessite que os bullets sejam mantidos, deverá ser feito de outra forma.*/
+}
+
+/* seletor de tag, basta apenas chamar a tag descrita na folha html */
+a {
+  text-decoration: none; /* retira toda a "decoração" padrão dos links */
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+/* ----- VARIÁVEIS ----- */
+/* para criar variáveis, basta inserir 2 ífens e descrever o nome pretendido. Para mais de uma nome, separar por ífem. */
+
+:root {
+  --header-height: 4.5rem;
+
+  /* colors */
+  --hue: 32;
+  /* HSL color mode */
+  --base-color: hsl(var(--hue) 36% 57%);
+  --base-color-second: hsl(var(--hue) 65% 88%);
+  --base-color-alt: hsl(var(--hue) 57% 70%);
+  --title-color: hsl(var(--hue) 41% 10%);
+  --text-color: hsl(0 0% 46%);
+  --text-color-light: hsl(0 0% 98%);
+  --body-color: hsl(0 0% 98%);
+
+  /* fonts */
+  --title-font-size: 1.875rem;
+  --subtitle-font-size: 1rem;
+
+  --title-font: 'Popins', sans-serif;
+  --body-font: 'DM Sans', sans-serif;
+}
+
+/* ----- BASE ----- */
+
+html {
+  scroll-behavior: smooth; /*aplica suavidade nas mudanças entre os menus, uma vez que se trata de rolagem de tela.*/
+}
+
+body {
+  /* primeiro valor é o peso (weight), tamanho (size), font-family e fonte alternativa. */
+  font: 400 1rem var(--body-font);
+  color: var(--text-color);
+  /* a chamada da variável em CSS é descrever var(--nome-da-variável) */
+  background-color: var(--body-color);
+  -webkit-font-smoothing: antialiased; /* maior leveza na fonte - webkit funciona como esse venderprefixer aos navegadores webkit */
+}
+
+.title {
+  /* ---peso-tamanho-família-,-fonte alternativa; */
+  font: 600 var(--title-font-size) var(--title-font);
+  color: var(--title-color);
+  -webkit-font-smoothing: auto;
+}
+
+.button {
+  background-color: var(--base-color); /*cor de fundo*/
+  color: var(--text-color-light); /*cor do texto do botão*/
+  display: inline-flex; /*para desabilitar o display inline por padrão do tipo de tag. Assim passará a ser possível aplcar a altura e ainda o alinhameto do conteúdo.*/
+  height: 3.5rem; /*altura do botão*/
+  align-items: center; /*alinhamento do conteúdo*/
+  padding: 0 2rem; /*afastamento do conteído em relação às margens, na ordem: superior/inferior e laterais*/
+  border-radius: 0.25rem; /*arredondamento das bordas*/
+  font: 500 1rem var(--body-font); /*configuração da fonte*/
+  transition: background 0.3s; /*configuração da transição configurada no hover, do que em quanto tempo.*/
+}
+
+/*habilitação de efeito hover, ao passar o mouse irá aconteceo que for descrito.*/
+.button:hover {
+  color: var(--base-color-alt); /*quando passar o mouse, assumirá essa cor*/
+}
+
+.divider-1 {
+  height: 1.5px;
+  background: linear-gradient(
+    270deg,
+    hsla(var(--hue), 36%, 57%, 1) 0%,
+    hsla(var(--hue), 65%, 88%, 0.34) 100%
+  );
+}
+
+.divider-2 {
+  height: 1px;
+  background: linear-gradient(
+    270deg,
+    hsla(var(--hue), 65%, 88%, 0.34) 0%,
+    hsla(var(--hue), 36%, 57%, 1) 100%
+  );
+}
+
+/* ----- LAYOUT ----- */
+
+.container {
+  width: 95%; /* largura */
+  /*margin: 0 auto; /*aplica os afastamentos superir e inferir, no primeiro valor e laterais no segundo valor */
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.grid {
+  display: grid; /*vai habilitar funcionalidades novas no css, como o gap*/
+  gap: 2rem; /* espaçamento entre as caixas contidas na classe em que se insere a propriedade. */
+}
+
+.section {
+  /*--: suprior/inferior e laterais; */
+  /*padding: 5rem 0; /* afastamento ao redor do conteúdo da caixa*/
+  padding: calc(5rem + var(--header-height)) 0;
+  /* incluído novo padding em função das correções de bug e aplicação da responsividade >1200px */
+}
+
+.section .title {
+  margin-bottom: 1rem; /* padroniza todos os espaços abaixo de todas as classes title pertencentes à classe section*/
+}
+
+.section .subtitle {
+  font-size: var(--subtitle-font-size);
+}
+
+.section header {
+  /*para toda tag header dentro de uma classe section*/
+  margin-bottom: 4rem;
+}
+
+.section header strong {
+  /*tag strong filha da tag header numa classe section*/
+  color: var(--base-color);
+}
+
+/* o # aplica o seletor para id, ou seja, #id */
+#header {
+  border-bottom: 1px solid var(--base-color); /* ativa a linha de base da caixa, ou seja apenas a borda inferior. */
+  margin-bottom: 2rem; /* margem inferior */
+  display: flex;
+
+  width: 100%;
+  position: fixed; /*fixará a posição do cabeçalho, contudo a "camada" relacionada à próxima caixa deixará de ser "empurrada" pelo header, ficando "abaixo dele. Para corrigir deverá ser incluído o afastamento da camada seguinte (main) somando o tamanho do header.*/
+  top: 0;
+  left: 0;
+  z-index: 100; /*aplicar em 100, para que ele assuma seu tamanho total já configurado*/
+  background-color: var(--body-color);
+  box-shadow: 0 0 5px rgba(var(--hue), 12, 2, 0.1);
+}
+
+#header.scroll {
+  background-color: var(--base-color);
+  box-shadow: 0 0 10px rgba(var(--hue), 12, 2, 0.8); /* na ordem de descrição: 1º-deslocamento do eixo horizontal 2º-deslocamento do eixo vertical 3º- blur 4º-relativo ao "spread", o espalhamento da cor.*/
+}
+
+#header.scroll .logo span {
+  color: var(--body-color);
+  transition: 0.2s;
+}
+
+#header.scroll .icon-menu {
+  color: var(--body-color);
+  transition: 0.2s;
+}
+
+/*main foi retirado e levado para o responsivo em >1200px
+main {
+  margin-top: calc(var(--header-height) + 2rem); 
+  /*função calc() disponibiliza a possibilidade de realizar um cálculo qualquer dentro do css)*/
+/*}
+
+/* ----- LOGO ----- */
+
+/* o . aplica o seletor para class, ou seja, .class */
+.logo {
+  font: 700 1.8rem 'Poppins', sans-serif;
+  color: var(--title-color);
+}
+
+/* neste seletor, é indicado que busque a tag span dentro da class logo */
+.logo span {
+  color: var(--base-color);
+}
+
+.logo-alt span {
+  color: var(--body-color);
+}
+
+/* ----- NAVIGATION ----- */
+
+nav {
+  height: var(
+    --header-height
+  ); /*rem é uma unidade de medida relativa, "root elemment measure" (1rem = 16px)*/
+  display: flex; /* irá flexibilizar a disposição das outras "caixas" dentro da div */
+  justify-content: space-between; /* aplicará um alinhamento horizontal jogando cada "caixa" para cada lado, atribuindo um espaço entre os elementos, dividido de forma proporcional ao tamanho da página. */
+  align-items: center; /* alinhamento no eixo vertical */
+  width: 100%;
+}
+
+nav ul li {
+  /*busque dentro de nav o li que está dentro do ul*/
+  text-align: center;
+}
+
+nav ul li a {
+  transition: color 0.2s; /*tempo de trasição para a configuração do hover na lista, assim está sendo aplicado para tudo, em todas as propriedades que existem em transição, quando não informada em qual deverá ser aplicada.*/
+  position: relative;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  /*ao passar o mouse por cima - hover - em um link da lista dentro de nav.*/
+  color: var(--base-color);
+  font-weight: bold;
+}
+
+nav ul li a::after {
+  /*pseudo-element depois do hover num dos links da lista em nav.*/
+  /*cria um elemento vazio, que servirá para a animação da barra abaixo do nome de cada item do menu. Neste ponto, sem que haja o hover pelo mouse, fica sem "largura".*/
+  content: ''; /*item obrigatório*/
+  width: 0%; /*item obrigatório*/
+  height: 2px; /*item obrigatório*/
+
+  background: var(--base-color);
+  /* com display block, o padding preencheu todo o elemento vazio que está em bloco
+  display: block;
+  padding: 1.5rem;*/
+
+  position: absolute; /*será absoluto ao próximo pai dele que tiver um position relative*/
+  left: 0; /*posiciona à esqueda, no início do elemento*/
+  bottom: -1.5rem; /*posiciona na base do elemento*/
+
+  transition: width 0.2s; /*transição da largura, ou seja, o crescimento da barra para a lateral, no mesmo tempo da transição do item no menu*/
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+  /*cria um elemento vazio, que servirá para a animação da barra abaixo do nome de cada item do menu. Neste ponto, com o hover pelo mouse, passa a ser visto, assim poderá ser incluída a transição no elemento anterior.*/
+  width: 100%;
+}
+
+nav .menu {
+  opacity: 0; /*retira cor, com zero fica completamente opaco*/
+  visibility: hidden; /*fica oculto*/
+  top: -20rem;
+  transition: 0.6s;
+}
+
+nav .menu ul {
+  display: none; /*faz com que desapareça o menu da tela, mesmo quando aberto, para que não haja sobreposição do menu "cru" ao longo da transição, principalmente ao fechar o menu.*/
+}
+
+/* ---- MOSTRAR MENU ---- */
+/*inicia com o menu fechado, pelo JS será incluído na classe do nav.container a palavra show: <nav class="conteiner show". No CSS, ao descrever o seletor que será incluído pela JS, é necessário aplicá-lo de forma seguida ao seletor de tag, sem espaço entre eles.*/
+nav.show .menu {
+  /*quando houver a classe show na tag nav, irá buscar a classe menu lá dentro*/
+  opacity: 1;
+  visibility: visible;
+
+  background: var(--body-color);
+
+  height: 100vh; /*configura a altura para a totalidade da view port height, ou seja, da janela/tela do dispositivo*/
+  width: 100vw; /*configura a altura para a totalidade da view port width, ou seja, da janela/tela do dispositivo*/
+
+  /*ainda assim não é suficiente para deixá-lo completo na tela, para tal será necessário criar uma linha acima.*/
+
+  position: fixed; /*assim fixará uma "nova folha", atribuída ao menu de navegação*/
+  top: 0; /*definindo como início exatamente no topo*/
+  left: 0; /*definindo como início exatamente à esquerda*/
+  /*essa configuração já deixará o elemento do menu de navegação por toda a tela*/
+
+  display: grid; /*habilita novas possibilidades*/
+  place-content: center; /*atribui uma reorganização com separação por igual de todos os lados, centralizando perfeitamente ao meio*/
+}
+
+nav.show .menu ul {
+  display: grid; /*fará com o que o menu surja, respeitando a transição de opacidade 0 até 1, no tempo descrito na tansition. Complementa o nav .menu ul como display: none.*/
+}
+
+nav.show ul.grid {
+  /*quando houver a classe show na tag nav, irá buscar o restante descrito.*/
+  /*determina uma maior especifidade, de 0,1,2 (12), sendo maior que apenas o grid, configuração que será aplicada apenas à class grid associada ao ul dentro do nav.*/
+  gap: 4rem;
+}
+
+/* toggle menu - troca de menu aberto e fechado, tipo um interruptor.*/
+
+.toggle {
+  color: var(--base-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+nav .icon-close {
+  visibility: hidden;
+  opacity: 0;
+
+  position: absolute;
+  top: -3rem; /*juntamente com a configuração de transição e a configuração top abaixo (nav.show div.icon-close) irá surgir e desaparecer no topo da tela.*/
+  right: 1.5rem;
+
+  transition: 0.5s; /*sem especificação irá aplicar em tudo, todos os valores. Fará com que o X apareça em 0.5s na tela, correndo de cima para baixo.*/
+}
+
+nav.show div.icon-close {
+  visibility: visible;
+  opacity: 1; /*com a transição acima, o X irá de opacidade 0 para 1 em 0.2s */
+  top: 1.5rem; /* irá ser entregue de cima para baixo, uma vez que na configuração acima (nav .icon-closr) foi incluído o valor: top*/
+}
+
+/* ----- HOME ----- */
+
+#home {
+  overflow: hidden;
+}
+
+/* o seletor de id home, e será chamada a classe container de dentro do id indicado. */
+#home .container {
+  margin: 0;
+}
+
+#home .image {
+  position: relative; /*para habilitar o posicionamento do sudo element relativo à sua caixa pai.*/
+}
+
+/* sudo element - criação de um elemento fictítio/fantasma.*/
+#home .image::before {
+  /*antes no conteúdo de classe image irá surgir um elemento qualquer*/
+  content: ''; /*vai aplicar a descrição aqui contida dentro das aspas simples, e pode ser vazio*/
+  /* abaixo a configuração do elemento*/
+  height: 100%;
+  width: 100%;
+  background: var(--base-color);
+  position: absolute;
+  /*habilitados pela position*/
+  top: -16.8%; /*deslocamento do topo em relação à figura, feito regra de 3 em percentual.*/
+  left: 16.8%; /*deslocamento para a esquerda em relação à figura, feito regra de 3 em percentual.*/
+  z-index: 0; /*eixo z, de profundidade, como camadas*/
+}
+
+/* no identificador home, busque a classificação image e dentro desta a tag img*/
+#home .image img {
+  position: relative; /* habilita novas propriedades pro CSS para o elemento desejado */
+  right: 2.93rem;
+}
+
+/*mesmas propriedades para mais de um elemento, ficam descritos separados por vírgula*/
+#home .image img,
+#home .image::before {
+  border-radius: 0.25rem; /*arredondamento da borda das imagens*/
+}
+
+#home .text {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  text-align: center;
+}
+
+#home .text h1 {
+  margin-bottom: 1rem;
+}
+
+#home .text p {
+  margin-bottom: 2rem;
+}
+
+/* ----- ABOUT ----- */
+
+#about {
+  background: white;
+}
+
+/* o seletor de id about, e será chamada a classe container de dentro do id indicado. */
+#about .container {
+  margin: 0;
+}
+
+#about .image {
+  position: relative; /*para habilitar o posicionamento do sudo element relativo à sua caixa pai.*/
+}
+
+/* sudo element - criação de um elemento fictítio/fantasma.*/
+#about .image::before {
+  /*antes no conteúdo de classe image irá surgir um elemento qualquer*/
+  content: ''; /*vai aplicar a descrição aqui contida dentro das aspas simples, e pode ser vazio*/
+  /* abaixo a configuração do elemento*/
+  height: 100%;
+  width: 100%;
+  background: var(--base-color);
+  position: absolute;
+  /*habilitados pela position*/
+  top: -9%; /*deslocamento do topo em relação à figura, feito regra de 3 em percentual.*/
+  left: -9%; /*deslocamento para a esquerda em relação à figura, feito regra de 3 em percentual.*/
+  z-index: 0; /*eixo z, de profundidade, como camadas*/
+}
+
+/* no identificador home, busque a classificação image e dentro desta a tag img*/
+#about .image img {
+  position: relative; /* habilita novas propriedades pro CSS para o elemento desejado */
+  left: 2rem;
+}
+
+/*mesmas propriedades para mais de um elemento, ficam descritos separados por vírgula*/
+#about .image img,
+#about .image::before {
+  border-radius: 0.25rem; /*arredondamento da borda das imagens*/
+}
+
+#about .text {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  text-align: center;
+}
+
+#about .text h1 {
+  margin-bottom: 1rem;
+}
+
+#about .text p {
+  margin-bottom: 2rem;
+}
+
+/* ----- SERVICES ----- */
+
+.cards.grid {
+  /*classe cards que tiver grid*/
+  gap: 1.5rem;
+}
+
+.card {
+  padding: 3.625rem 2rem;
+  box-shadow: 0 0 15px rgba(var(--hue), 0, 0, 0.1);
+  border-bottom: 0.25rem solid var(--base-color);
+  border-radius: 0.25rem 0.25rem 0 0;
+  text-align: center;
+  
+  transition: 0.4s;
+}
+
+.card i {
+  display: block;
+  margin-bottom: 1.5rem;
+  font-size: 5rem;
+  color: var(--base-color);
+
+  transition: 0.3s;
+}
+
+.card i:hover {
+  /*transform: translateY(-20px);*/
+  transform: scale(1.3);
+}
+
+
+.card .title {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ----- TESTIMONIALS ----- */
+
+#testimonials {
+  background: white;
+}
+
+/*ajustes de posicionamento no header e nos containers*/
+#testimonials .container {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#testimonials header {
+  margin-bottom: 0;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+/* ajustes finalizados*/
+
+#testimonials blockquote {
+  padding: 2rem;
+  box-shadow: 0 0 12px rgba(var(--hue), 0, 0, 0.1);
+  border-radius: 0.25rem;
+  /*será incluído um plugin/biblioteca de um código já utilizado para o sistema carrossel*/
+}
+
+#testimonials blockquote p {
+  position: relative; /*relaciona com o position absolute abaixo*/
+  text-indent: 1.875rem;
+  margin-bottom: 1.5rem;
+
+  color: var(--title-color);
+
+  font: 400 1rem var(--body-font);
+}
+
+#testimonials blockquote p span {
+  font: 400 3rem serif;
+
+  position: absolute; /*cria um novo contexto/camada, sendo necessário relacionando(relative) à algo, neste caso ficará relativo ao p, descrito acima*/
+  /*display: flex;*/
+  top: -0.8rem;
+  left: -1.875rem;
+
+  color: var(--base-color);
+}
+
+#testimonials cite {
+  display: flex;
+  align-items: center;
+  font-style: normal;
+}
+
+#testimonials cite img {
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: cover; /*pegue no objeto e faça caber, ou seja, encaixe (fit) cobrindo (cover) todo o espaço que tiver disponível. Assim fará com que a img caiba certinho dentro do espaço programado na largura e altura descritos.*/
+  clip-path: circle(); /*propriedade para criar uma máscara circular*/
+  margin-right: 0.5rem;
+}
+
+/* SWIPER */
+/* configuração personalizada a partir da documentação existente em: https://swiperjs.com/swiper-api , onde é possível verificar parâmetro por parâmetro e aplicar o qual fará mais sentido no projeto atual.*/
+
+.swiper-slide {
+  height: auto;
+  padding: 4rem 1rem; /*superiro e inferior | laterais*/
+}
+
+.swiper-pagination-bullet {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.swiper-pagination-bullet-active {
+  /*configuração do ponto do slide ativo*/
+  background-color: var(--base-color); /*cor do bullet ativo*/
+}
+
+/* ----- CONTATO ----- */
+#contact .grid {
+  gap: 4rem;
+}
+
+#contact .text p {
+  margin-bottom: 2rem;
+}
+
+#contact .button i,
+#contact ul li i {
+  font-size: 1.5rem;
+  margin-right: 0.625rem;
+}
+
+#contact ul.grid {
+  gap: 2rem;
+}
+
+#contact ul li {
+  display: flex;
+  align-items: center;
+}
+
+#contact ul li i {
+  color: var(--base-color);
+}
+
+/* ----- FOOTER ----- */
+footer {
+  background: var(--base-color);
+}
+
+footer.section {
+  padding: 4rem 0;
+  /*reajuste dos espaçamento do paddingo em correção do bug pelo ajuste dos paddings das sections.*/
+}
+
+footer .logo {
+  display: inline-block; /*a logo é um elemento do tipo a, assim o display dele, pelo User Agant é inline, por isso é necessário modificar para display inline-block, dessa forma irá assumir a configuração do margin-bottom*/
+  margin-bottom: 1.5rem;
+}
+
+footer .brand p {
+  color: var(--text-color-light);
+  margin-bottom: 0.75rem;
+}
+
+footer i {
+  font-size: 1.5rem;
+  color: var(--text-color-light);
+}
+
+footer .social a {
+  margin-right: 2rem;
+  transition: 0.3s;
+  display: inline-block; /*necessário atribuir a configuração inline-block, para que seja possível a animação aplicada pelo hover abaixo*/
+}
+
+footer .social a:hover {
+  /*ao passar o mause*/
+  transform: translateY(-8px);
+  /*os ícones irão "animar" se movimentando no eixo Y (vertical), para cima (pixels negativos)*/
+}
+
+/* ----- VOLTA PARA HOME ----- */
+.back-to-top {
+  background: var(--base-color);
+  color: var(--text-color-light);
+
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 0.5rem;
+  clip-path: circle();
+  line-height: 0;
+
+  visibility: hidden;
+  opacity: 0;
+
+  transition: 0.3s;
+  transform: translateY(100%); /*propriedade que aceita outras propriedades*/
+}
+
+.back-to-top.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ----- RESPONSÍVEL ----- */
+
+/* MEDIA QUERIES FORNECIDAS NA AULA: */
+/* EXTRA LARGE DEVICES: 1200 > */
+@media (min-width: 1000px) {
+  /*at rule de media querie (largura-mínima: 000px)*/
+  /*abaixo regras a serem aplicadas quando o display tiver + que 1200 px */
+
+  .container {
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section {
+    padding: 10rem 0;
+  }
+
+  .section header,
+  #testimonials header {
+    max-width: 32rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .button {
+    height: 3.25rem;
+  }
+
+  nav .menu {
+    opacity: 1;
+    visibility: visible;
+    top: 0;
+  }
+
+  nav .menu ul {
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav .menu ul li a.title {
+    font: 400 1rem var(--body-color);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav .menu ul li a.title.active {
+    font-weight: bold;
+    -webkit-font-smoothing: auto;
+  }
+
+  nav .icon-menu {
+    display: none;
+  }
+
+  #header.scroll nav .menu ul li a.title {
+    color: var(--body-color);
+  }
+
+  #header.scroll nav .menu ul li a::after {
+    background: var(--title-color);
+    transition: width 0.2s; /*transição da largura, ou seja, o crescimento da barra para a lateral, no mesmo tempo da transição do item no menu*/
+  }
+
+  #header.scroll nav .menu ul li a:hover,
+  #header.scroll nav .menu ul li a.active {
+    /*ao passar o mouse por cima - hover - em um link da lista dentro de nav.*/
+    color: var(--title-color);
+  }
+
+
+  /* LAYOUT */
+  main {
+    margin-top: var(--header-height);
+    /*transferêcia do main que estava no css inicial, para inclusive corrigir um bug dos espaçamentos ao acessar as sessões pelo menu*/
+  }
+
+  /*HOME*/
+  #home .container {
+    grid-auto-flow: column;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+
+  #home .image {
+    order: 1;
+  }
+
+  #home .text {
+    order: 0;
+    max-width: 26rem;
+    text-align: left;
+  }
+
+  /*ABOUT*/
+  #about .container {
+    margin: 0 auto;
+    grid-auto-flow: column;
+  }
+
+  #about .text {
+    text-align: left;
+  }
+
+  /*QUANDO HOUVER MAIS DE UM PARÁGRAFO, PARA LIMITAR O CRESCIMENTO DA IMAGEM ALÉM DA FOTOGRAFIA.
+  #about .image::before {
+    max-height: 19rem;
+  }*/
+
+  /* SERVICES */
+  .cards {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .card {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  /* TESTIMONIALS */
+  #testimonials .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /*CONTACT*/
+  #contact .container {
+    grid-auto-flow: column;
+    align-items: center;
+  }
+
+  #contact .text {
+    max-width: 25rem;
+  }
+
+  .back-to-top.show:hover {
+    color: var(--title-color);
+  }
+
+  /*FOOTER*/
+  footer.section {
+    padding: 3.75rem 0;
+  }
+
+  footer .container {
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  footer .text_logo {
+    font-size: 14px;
+  }
+}
+/* LARGE DEVICES: 1023 > */
+/* LARGE DEVICES: 992 > */
+@media (min-width: 992px) {
+  /*at rule de media querie (largura-mínima: 000px)*/
+  :root {
+    --title-font-size: 2.25rem;
+    --subtitle-font-size: 1.125rem;
+  }
+}
+/* MEDIUM DEVICES: 767 > (geralmente tablet), menor que tablet é todo o código já feito.*/

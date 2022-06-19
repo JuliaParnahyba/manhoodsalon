@@ -1,0 +1,308 @@
+<!--Tag inicial determina que é um html5, o mais recente.-->
+<!DOCTYPE html>
+
+<!--tag root, ou seja, raíz do html.-->
+<html lang="pt-BR">
+  <!--Filho do HTML, aqui são descritas as configurações da página, informações internas.-->
+  <head>
+    <!--Informação do tipo de caracteres serão utilizados, tem relação direta com caracteres dos dialetos/linguas utilizadas no mundo.-->
+    <meta charset="UTF-8" />
+    <!--relação com a portabilidade de tela, ou seja, irá se adaptar a diferentes dimensões/tamanhos de tela.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Descrição do "Título geral" da página, o qual ficará descrito e visível na aba da webpage, ou ainda quando for incluída nos favoritos, irá levar essa descrição como nome do conteúdo.-->
+    <title>OriginSix | Projeto NLW#6 - Together</title>
+
+    <!--para incluir a folha de trabalho CSS dos ícones como fontes-->
+    <link rel="stylesheet" href="./assets/fonts/style.css" />
+
+    <!--para incluir o pluggin do swiper dos depoimentos, que será combinado com o scrip também já pronto. Ambos estão na rede, não existindo em diretório local.-->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+    />
+
+    <!--para incluir a folha de trabalho CSS-->
+    <link rel="stylesheet" href="style.css" />
+
+    <!--links de pré-conexão com o google fonts para que seja possível utilizar as fontes desejadas dna folha de CSS. Ao executar no navegador, a página irá "chamar" os links associados às fontes do google, fazendo com que elas sejam carregadas na página adequadamente.-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <!--Filho do HTML, aqui serão inseridos todos os dados que ficarão visíveis do lado do usuário, ou seja, a página propriamente dita.-->
+  <body>
+    <!-- ## CABEÇALHO DA PÁGINA ##-->
+    <header id="header">
+      <!--class scroll incluída para que ela possa gerar uma configuração de sobreado ao rolar a tela, enquanto o menu se mantém fixo.-->
+      <nav class="container">
+        <a class="logo" href="#">manhood<span>salon.</span></a>
+        <!--criação do menu-->
+        <div class="menu">
+          <ul class="grid">
+            <li><a class="title" href="#home">Início</a></li>
+            <li><a class="title" href="#about">Sobre</a></li>
+            <li><a class="title" href="#services">Serviços</a></li>
+            <li><a class="title" href="#testimonials">Depoimentos</a></li>
+            <li><a class="title" href="#contact">Contato</a></li>
+            <!--o # buscará a referência do id na página igual ao descrito após o #, criando uma ancora, que levará o usuário à zona da página que tenha o id atribuído.-->
+          </ul>
+        </div>
+        <div class="toggle icon-menu"></div>
+        <!--será configurado junto com o JS para a abrir as opções do menu-->
+        <div class="toggle icon-close"></div>
+        <!--será configurado junto com o JS para fechar o menu-->
+      </nav>
+    </header>
+
+    <!-- ## CONTEÚDO DA PÁGINA ##-->
+    <main>
+      <!-- ## HOME ##-->
+      <section class="section" id="home">
+        <div class="container grid">
+          <div class="image">
+            <img
+              src="https://images.unsplash.com/photo-1599351430140-c70f0250bd70?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=60&raw_url=true&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8aGFpcmRyZXNzZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=400"
+              alt="Mãos cortando um cabelo masculino."
+            />
+          </div>
+
+          <div class="text">
+            <h2 class="title">
+              Cuidado e estilo que estavam faltando para você.
+            </h2>
+            <p class="subtitle">
+              Um salão exclusivo e especializado em tratamentos e cortes
+              masculinos, para você melhorar ainda mais a sua aparência.
+            </p>
+            <a class="button" href="#">Agende o seu horário</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ## LINHA SEPARADORA DE CONTEÚDO##-->
+      <div class="divider-1"></div>
+
+      <!-- ## SOBRE ##-->
+      <section class="section" id="about">
+        <!--section.section#about>.container.grid atalho pra criar uma tag section com class="section" id="about" com tag filha (>) div de classe="container grid"-->
+        <div class="container grid">
+          <div class="image">
+            <img
+              src="https://images.unsplash.com/photo-1622288432450-277d0fef5ed6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+              alt="Time de barbeiros cortando cabelos"
+            />
+          </div>
+          <div class="text">
+            <!--h2.title+p*3 = corresponde a um atalho que criará uma tag h2 de classe title e fora dele 3 tags p. Ao clicar no enter o "Emmet" do VS irá transformar na estrutura descrita em estrutura html, abaixo:-->
+            <h2 class="title">Sobre nós</h2>
+            <p class="subtitle">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque
+              assumenda laudantium veritatis illo eius veniam incidunt, dolore
+              officiis hic ipsum ab magnam repellat consequuntur aspernatur
+              numquam officia, quo sint aliquam!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ## LINHA SEPARADORA DE CONTEÚDO 2 ##-->
+      <div class="divider-2"></div>
+
+      <!-- ## SERVIÇOS ##-->
+      <section class="section" id="services">
+        <div class="container grid">
+          <header>
+            <h2 class="title">Serviços</h2>
+            <p class="subtitle">
+              Com mais de 10 anos no mercado, o
+              <strong>Manhoodsalon.</strong> já conquistou clientes de inúmeros
+              países com seus tratamentos exclusivos e totalmente voltados para
+              o público masculino.
+            </p>
+          </header>
+          <div class="cards grid">
+            <!--atalho para descrever as tags abaixo: .card*3>(.icon-)+h3.title+p, ou seja, vai criar 3 divs de classe card, em que cada uma receberá como filhas uma tag div de classe icon-, uma tag h3 de classe title e uma tag p-->
+            <div class="card">
+              <i class="icon-barber-cosmetics"></i>
+              <!--tag destinada aos icones-->
+              <h3 class="title">Terapia Capilar</h3>
+              <p class="subtitle">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit
+                magni nisi laborum architecto, dolores dolor ullam aliquam
+                obcaecati dolore, quam provident, ea beatae. Deserunt ullam
+                laboriosam assumenda eaque nulla aliquam!
+              </p>
+            </div>
+            <div class="card">
+              <i class="icon-man-face"></i>
+              <!--tag destinada aos icones-->
+              <h3 class="title">Dia de Rei</h3>
+              <p class="subtitle">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui,
+                tempora natus voluptatibus ipsa facere blanditiis nisi molestias
+                quasi aspernatur debitis nobis, assumenda quos nihil. Voluptas
+                minima natus ipsum dolore saepe?
+              </p>
+            </div>
+            <div class="card">
+              <i class="icon-scissors"></i>
+              <!--tag destinada aos icones-->
+              <h3 class="title">Corte</h3>
+              <p class="subtitle">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit
+                ipsa eum sit autem sed ipsam eaque a hic! Obcaecati placeat vero
+                corrupti incidunt fugiat sed laborum reiciendis? Iure, sed
+                dicta!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ## LINHA SEPARADORA DE CONTEÚDO 1 ##-->
+      <div class="divider-1"></div>
+
+      <!-- ## DEPOIMENTOS ##-->
+      <section class="section" id="testimonials">
+        <div class="container">
+          <!--Retairado o da classe grid para funcionar os bullets do carrossel e a caixa de depoimento volta a caber dentro da div que pertença.-->
+          <header>
+            <h2 class="title">
+              Depoimentos de quem já sentou na nossa cadeira.
+            </h2>
+          </header>
+          <div class="testimonials swiper">
+            <div class="swiper-wrapper">
+              <div class="testimonial swiper-slide">
+                <blockquote>
+                  <p>
+                    <span>&ldquo;</span>Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Nostrum repellat facere alias aut minima.
+                    Iste at, quod eligendi possimus ea nostrum aut? Quod
+                    voluptatum id sint, quo voluptatem voluptatibus dignissimos!
+                  </p>
+                  <cite>
+                    <img
+                      src="https://randomuser.me/api/portraits/men/58.jpg"
+                      alt=""
+                    />
+                    Walter Souza
+                  </cite>
+                </blockquote>
+              </div>
+              <div class="testimonial swiper-slide">
+                <blockquote>
+                  <p>
+                    <span>&ldquo;</span>Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Nostrum repellat facere alias aut minima.
+                    Iste at, quod eligendi possimus ea nostrum aut? Quod
+                    voluptatum id sint, quo voluptatem voluptatibus dignissimos!
+                  </p>
+                  <cite>
+                    <img
+                      src="https://randomuser.me/api/portraits/men/54.jpg"
+                      alt=""
+                    />
+                    Carlos Araújo
+                  </cite>
+                </blockquote>
+              </div>
+              <div class="testimonial swiper-slide">
+                <blockquote>
+                  <p>
+                    <span>&ldquo;</span>Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Nostrum repellat facere alias aut minima.
+                    Iste at, quod eligendi possimus ea nostrum aut? Quod
+                    voluptatum id sint, quo voluptatem voluptatibus dignissimos!
+                  </p>
+                  <cite>
+                    <img
+                      src="https://randomuser.me/api/portraits/men/77.jpg"
+                      alt=""
+                    />
+                    Renam Carneiro
+                  </cite>
+                </blockquote>
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider-2"></div>
+
+      <!-- ## CONTATO ##-->
+      <section class="section" id="contact">
+        <div class="container grid">
+          <div class="text">
+            <h2 class="title">Entre em contato com a gente!</h2>
+            <p class="subtitle">
+              Entre em contato conosco, tire suas dúvidas, mande seu elogio ou
+              crítica. Queremos te ouvir!
+            </p>
+            <a
+              href="https://api.whatsapp.com/send?phone=+5521975307661&text=E aí?! Como faço para agendar um serviço?"
+              class="button"
+              target="_blank"
+            >
+              <!--Para abrir uma nova aba/página-->
+              <i class="icon-whatsapp"></i>
+              Chama no Whatsapp
+            </a>
+          </div>
+
+          <div class="links">
+            <ul class="grid">
+              <li><i class="icon-phone"></i>+55 21 97530-7661</li>
+              <li><i class="icon-map-pin"></i>Rua dos Bobos, nº9</li>
+              <li><i class="icon-mail"></i>mandeseuemail@manhoodsalon.com</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider-1"></div>
+    </main>
+
+    <footer class="section" id="footer">
+      <div class="container grid">
+        <div class="brand">
+          <a class="logo logo-alt" href="#">manhood<span>salon.</span></a>
+          <p class="text_logo">©2022 Manhoodsalon.</p>
+          <p class="text_logo">Todos os direitos reservados.</p>
+        </div>
+
+        <div class="social">
+          <a href="https://www.instagram.com/juparnahyba/" target="_blank"
+            ><i class="icon-instagram"></i
+          ></a>
+          <a href="https://www.facebook.com/ju.parnahyba" target="_blank"
+            ><i class="icon-facebook"></i
+          ></a>
+          <a
+            href="https://www.youtube.com/channel/UCzYBM4UvJRrKy4A0w2OMBnw"
+            target="_blank"
+            ><i class="icon-youtube"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+
+    <a href="#" class="back-to-top"><i class="icon-arrow-up"></i></a>
+
+    <!--para incluir o pluggin do swiper dos depoimentos, que será combinado com o css também já pronto. Ambos estão na rede, não existindo em diretório local.Preciso ser inserido antes do scrip da página, para que o script da página possa buscar informações dentro dele.-->
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+    <!--Ferramenta para que ao rolar entre as páginas do menu, estas sejam "reveladas" suavimente.-->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!--tag para relacionar à folha de trabalho JavaScript, o qual foi previamente criada na pasta do mesmo projeto, caminho que estará desrito no valor src.-->
+    <script src="/main.js"></script>
+  </body>
+</html>
+<!--tag html root de fechamento.-->
